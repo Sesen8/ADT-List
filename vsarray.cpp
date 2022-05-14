@@ -10,7 +10,7 @@
 using std::string;
 
 VSArray::VSArray(size_t capacity, double increasePercentage){
-    _capacity=(capacity);
+    _capacity=(capacity); //fixed from andre
     _data = new Object*[_capacity];
     for (size_t i = 0; i < _capacity; i++) {
         _data[i] = nullptr;
@@ -18,11 +18,10 @@ VSArray::VSArray(size_t capacity, double increasePercentage){
 
 }
 
-
 VSArray::VSArray(const VSArray& list){
     _size = list._size;
     _data = new Object*[_capacity];
-    for (size_t i = 0; i < _size; i++) { // Issa correction to the _capacity
+    for (size_t i = 0; i < _size; i++) {
         _data[i] = list.Get(i)->Clone();
     }
     for (size_t i = _size; i < _capacity; i++){
@@ -31,8 +30,6 @@ VSArray::VSArray(const VSArray& list){
 
 
 }
-
-
 
 VSArray::~VSArray(){
     for(int i=0; i<_capacity; i++){
@@ -61,11 +58,6 @@ const VSArray& VSArray::operator=(const VSArray& rhs){
     }
     return *this;
 }
-
-
-
-
-
 bool VSArray::Insert(Object* element, size_t position) {
     if (position > _size) {
         return false;
@@ -77,7 +69,6 @@ bool VSArray::Insert(Object* element, size_t position) {
         for(size_t i =_size; i>position; i-- ){
             _data[i] = _data[i-1];
         }
-
     }
     _data[position] = element;
     _size++;
@@ -110,7 +101,6 @@ Object* VSArray::Remove(size_t position){
     return retVal;
 
 }
-
 
 Object* VSArray::Get(size_t position)const {
     if (position >= _size) {
